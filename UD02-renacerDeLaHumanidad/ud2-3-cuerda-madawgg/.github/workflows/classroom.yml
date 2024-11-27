@@ -1,0 +1,80 @@
+name: PHP Composer
+
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+    branches:
+      - 'main'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    if: contains(github.event.head_commit.message, 'deploy')
+    runs-on: ubuntu-latest
+
+    env:
+      REPOSITORY_NAME: ${{ github.event.repository.name }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Configure Git Identity
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+
+    - name: Get branch prefix from repository name
+      id: get_branch_prefix
+      run: |
+        # Extract unit number X and activity number YY
+        branch_prefix=$(echo $REPOSITORY_NAME | sed -E 's/^ud([0-9]+)-([0-9]+).*$/\1-\2/')
+        echo "BRANCH_PREFIX=$branch_prefix" >> $GITHUB_ENV
+
+    - name: Checkout tests repository
+      uses: actions/checkout@v4
+      with:
+        repository: GGEdu/DWESTests
+        ref: "ud${{ env.BRANCH_PREFIX }}"
+        token: ${{ secrets.TESTS_TOKEN }}
+        path: ./temp
+        fetch-depth: 0
+        clean: false
+    
+    - name: Copy specific files to root
+      run: |
+        rsync -av ./temp/ ./
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.3'
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v4
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
+    
+    - name: Execute test and token generation script
+      run: |
+        php tokenScript.php "${{ github.actor }}" "${{ env.REPOSITORY_NAME }}"
+
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: ./test-results.xml
