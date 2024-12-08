@@ -1,0 +1,144 @@
+:root {
+    --primary-color: rgba(237, 110, 81, 1);
+    --text-color: #444;
+    --background-highlight: rgba(237, 110, 81, 0.1);
+    --hover-link-color: OrangeRed;
+    --font-primary: 'Roboto', sans-serif;
+    --font-secondary: 'Consolas', 'Monaco', monospace;
+    --color-note-bg: #eaf3ff;
+    --color-tip-bg: #e6f4ea;
+    --color-warning-bg: #fff3e0;
+    --color-severe-bg: #ffece6;
+    --color-caution-bg: #fde8e7;
+    --color-important-bg: #f3eaff;
+    --table-header-bg: #f0f0f0;
+    --table-border-color: #ccc;
+    --table-row-bg-odd: #fafafa;
+    --table-row-bg-even: #fff;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--color-note-bg);
+    margin: 20px;
+}
+
+table.invento-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+table.invento-table th,
+table.invento-table td {
+    border: 1px solid var(--table-border-color);
+    padding: 10px;
+    text-align: left;
+    font-family: var(--font-secondary);
+}
+
+table.invento-table th {
+    background-color: var(--table-header-bg);
+    color: var(--primary-color);
+}
+
+table.invento-table tbody tr:nth-child(odd) {
+    background-color: var(--table-row-bg-odd);
+}
+
+table.invento-table tbody tr:nth-child(even) {
+    background-color: var(--table-row-bg-even);
+}
+
+table.invento-table td {
+    color: var(--text-color);
+}
+
+table.invento-table th[colspan="2"] {
+    text-align: center;
+    font-weight: bold;
+    color: var(--hover-link-color);
+}
+
+table.invento-table td table {
+    width: 100%;
+    margin: 10px 0;
+}
+
+/* Estilos para el formulario */
+/* -------------------------- */
+/* Contenedor del formulario */
+form.invento-form {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid var(--table-border-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    font-family: var(--font-primary);
+}
+
+/* Estilos para el contenedor de cada campo */
+form.invento-form .form-group {
+    margin-bottom: 15px; /* Espacio entre campos */
+}
+
+/* Estilos para los labels */
+form.invento-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Estilos para los inputs de texto, número y selects */
+form.invento-form input[type="text"],
+form.invento-form input[type="number"],
+form.invento-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--table-border-color);
+    border-radius: 3px;
+    font-family: var(--font-secondary);
+    color: var(--text-color);
+    background-color: var(--background-highlight);
+    box-sizing: border-box;
+}
+form.invento-form .button{
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: var(--font-primary);
+    transition: background-color 0.3s;
+}
+/* Estilos para el botón de envío */
+form.invento-form button[type="submit"] {
+    background-color: var(--primary-color);
+    margin-right: 10px;
+}
+
+/* Estilos para el enlace que se parece a un botón */
+form.invento-form .button-link {
+    display: inline-block;
+    background-color: var(--text-color);
+    text-decoration: none;
+}
+
+/* Efecto hover para el enlace */
+form.invento-form .button-link:hover {
+    background-color: var(--background-highlight);
+    color: var(--text-color);
+}
+
+form.invento-form button[type="submit"]:hover {
+    background-color: var(--hover-link-color);
+}
+
+/* Estilos para el campo oculto (por si es necesario) */
+form.invento-form input[type="hidden"] {
+    display: none;
+}
