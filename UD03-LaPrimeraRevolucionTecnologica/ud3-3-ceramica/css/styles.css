@@ -1,0 +1,68 @@
+:root {
+    --primary-color: rgba(237, 110, 81, 1);
+    --text-color: #444;
+    --background-highlight: rgba(237, 110, 81, 0.1);
+    --hover-link-color: OrangeRed;
+    --font-primary: 'Roboto', sans-serif;
+    --font-secondary: 'Consolas', 'Monaco', monospace;
+    --color-note-bg: #eaf3ff;
+    --color-tip-bg: #e6f4ea;
+    --color-warning-bg: #fff3e0;
+    --color-severe-bg: #ffece6;
+    --color-caution-bg: #fde8e7;
+    --color-important-bg: #f3eaff;
+    --table-header-bg: #f0f0f0;
+    --table-border-color: #ccc;
+    --table-row-bg-odd: #fafafa;
+    --table-row-bg-even: #fff;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--color-note-bg);
+    margin: 20px;
+}
+
+table.invento-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+table.invento-table th,
+table.invento-table td {
+    border: 1px solid var(--table-border-color);
+    padding: 10px;
+    text-align: left;
+    font-family: var(--font-secondary);
+}
+
+table.invento-table th {
+    background-color: var(--table-header-bg);
+    color: var(--primary-color);
+}
+
+table.invento-table tbody tr:nth-child(odd) {
+    background-color: var(--table-row-bg-odd);
+}
+
+table.invento-table tbody tr:nth-child(even) {
+    background-color: var(--table-row-bg-even);
+}
+
+table.invento-table td {
+    color: var(--text-color);
+}
+
+table.invento-table th[colspan="2"] {
+    text-align: center;
+    font-weight: bold;
+    color: var(--hover-link-color);
+}
+
+table.invento-table td table {
+    width: 100%;
+    margin: 10px 0;
+}
